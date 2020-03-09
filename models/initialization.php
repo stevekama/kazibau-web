@@ -1,7 +1,7 @@
 <?php
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 // defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'home'.DS.'kazibauc'.DS.'public_html');
-defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'xampp'.DS.'htdocs'.DS.'kazibau');
+defined('SITE_ROOT') ? null : define('SITE_ROOT', DS.'xampp'.DS.'htdocs'.DS.'kazibau-web');
 defined('CONFIG_PATH') ? null : define('CONFIG_PATH', SITE_ROOT.DS.'config');
 defined('MODELS_PATH') ? null : define('MODELS_PATH', SITE_ROOT.DS.'models');
 // defined('VENDOR_PATH') ? null : define('VENDOR_PATH', SITE_ROOT.DS.'vendor');

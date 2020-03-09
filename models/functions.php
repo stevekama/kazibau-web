@@ -1,7 +1,7 @@
 <?php 
 
 function base_url(){
-    $url = "http://localhost/kazibau/";
+    $url = "http://localhost/kazibau-web/";
     // $url = "http://kazibau.co.ke/";
     return $url;
 }
