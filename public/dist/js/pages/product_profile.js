@@ -85,4 +85,57 @@ $(document).ready(function(){
         });
 
     });
+
+    // change product pic
+    $('#updateProductPicBtn').click(function(){
+        var action = "FIND_PRODUCT_BY_ID";
+        $.ajax({
+            url:base_url+'api/products/products.php',
+            type:"POST",
+            data:{action:action, product_id:product_id},
+            dataType:"json",
+            success:function(data){
+                $('#updateProductPicId').val(data.id);
+                $('#updateProductPicModal').modal('show');
+            }
+        });
+    });
+
+    $('#updateProductPicForm').submit(function(event){
+        event.preventDefault();
+        var product_pic = $('#updateProductPic').val();
+        if(product_pic == ''){
+            $('#alertMessageProfile').html('<div class="alert alert-danger alert-dismissible">Please Select a profile pic</div>');
+            return false;
+        }else{
+            var extension = product_pic.split('.').pop().toLowerCase();
+            if(jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1){
+                $('#updateProductPic').val('');
+                $('#alertMessageProfile').html('<div class="alert alert-danger alert-dismissible">The file selected is invalid. Please check and try again</div>');
+                return false;
+            }else{
+                $.ajax({
+                    url:base_url+"api/products/change_pic.php",
+                    type:"POST",
+                    data: new FormData(this),
+                    dataType:"json",
+                    contentType: false,       // The content type used when sending data to the server.
+                    cache: false,             // To unable request pages to be cached
+                    processData: false,
+                    beforeSend: function () {
+                        $("#updateProductPicSubmitBtn").val('Uploading..');
+                    },
+                    success:function(data){
+                        $("#updateProductPicSubmitBtn").val('Update');
+                        if(data.message == 'success'){
+                            find_product_by_id();
+                            $('#updateProductPicForm')[0].reset();
+                            $('#updateProductPicModal').modal('hide');
+                        }
+                    }
+                });
+                
+            }
+        }
+    });
 });

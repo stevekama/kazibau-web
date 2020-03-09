@@ -25,19 +25,14 @@ if(!$current_product){
     die();
 }
 $product->id = $current_product['id'];
-$product->user_id = $current_product['user_id'];
-$product->category_id = $current_product['category_id'];
-$product->brand_id = $current_product['brand_id'];
-$product->product = $current_product['product'];
-$product->product_description = $current_product['description'];
+
 if(isset($_FILES["pic"]["type"])){
     $product->attach_file($_FILES["pic"]);
-    $product->product_status = $current_product['product_status'];
-    $product->product_price = $current_product['product_price'];
-    $product->created_date = $current_product['created_date'];
     $product->edited_date = $d->format("Y-m-d H:i:s");
     if($product->save_photo()){
-        $data['message'] = "success";
+        $data['message']="success";
+        echo json_encode($data);
+        die();
     }
-    echo json_encode($data);
+    echo json_encode($product->errors);
 }

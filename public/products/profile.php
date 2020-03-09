@@ -27,7 +27,7 @@ require_once('../layouts/header.php');
                 <p id="productDescription" class="text-muted text-center">
                 </p>
                 <hr>
-                <a href="#" class="btn btn-primary btn-block">
+                <a href="#" id="updateProductPicBtn" class="btn btn-primary btn-block">
                     <b>Change Profile</b>
                 </a>
             </div>
@@ -138,13 +138,16 @@ require_once('../layouts/header.php');
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" name="product_id" id="updateProductPicId" class="form-control" placeholder="Product Name">
+                        <span id="alertMessageProfile"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="product_id" id="updateProductPicId" class="form-control" placeholder="Product Name">
                     </div>
                     
                     <div class="form-group">
-                      <label for="exampleInputFile">File input</label>
-                      <input type="file" id="exampleInputFile">
-                      <p class="help-block">Example block-level help text here.</p>
+                      <label for="updateProductPic">Product Pic</label>
+                      <input type="file" name="pic" id="updateProductPic">
+                      <p class="help-block">Please select qua;ity picture here.</p>
                     </div>
                   </div>
                   <div class="modal-footer">

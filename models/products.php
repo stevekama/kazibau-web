@@ -214,7 +214,7 @@ class Products{
         if(!empty($this->errors)){ return false; }
         
         //2. cant sae without filename and tempt location
-        if(empty($this->pic) || empty($this->temp_path)){
+        if(empty($this->product_pic) || empty($this->temp_path)){
             $this->errors[] = "The file location was not available. ";
             return false;
         }
@@ -227,12 +227,19 @@ class Products{
             unlink($target_path) ? true : false;
             //5. Attempt to move the file
             if(move_uploaded_file($this->temp_path, $target_path)){
-                /// save the data in db 
-                if($this->save()){
-                    //unset the path return true
+                $query = "UPDATE ".$this->table_name." SET ";
+                $query .= "product_pic = '{$this->product_pic}', edited_date = '{$this->edited_date}' ";
+                $query .= "WHERE id = {$this->id}";
+
+                // prepare query 
+                $stmt = $this->conn->prepare($query);
+                
+                // execute statement
+                if($stmt->execute()){
                     unset($this->temp_path);
                     return true;
                 }
+
             }else{
                 $this->errors[] = "The file upload failed, possibly due to incorrect permissions on the uploaded folder.";
                 return false;
@@ -240,12 +247,20 @@ class Products{
         }else{
             //5. Attempt to move the file
             if(move_uploaded_file($this->temp_path, $target_path)){
-                /// save the data in db 
-                if($this->save()){
-                    //unset the path return true
+
+                $query = "UPDATE ".$this->table_name." SET ";
+                $query .= "product_pic = '{$this->product_pic}', edited_date = '{$this->edited_date}' ";
+                $query .= "WHERE id = {$this->id}";
+
+                // prepare query 
+                $stmt = $this->conn->prepare($query);
+                
+                // execute statement
+                if($stmt->execute()){
                     unset($this->temp_path);
                     return true;
                 }
+
             }else{
                 $this->errors[] = "The file upload failed, possibly due to incorrect permissions on the uploaded folder.";
                 return false;
