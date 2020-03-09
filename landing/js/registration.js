@@ -23,7 +23,7 @@ $(document).ready(function(){
         event.preventDefault();
         var form_data = $(this).serialize();
         $.ajax({
-            url:"http://localhost/kazibau/api/users/new_user.php",
+            url:base_url+"api/users/new_user.php",
             type:"POST",
             data:form_data,
             dataType:"json",
@@ -33,7 +33,7 @@ $(document).ready(function(){
             success:function(data){
                 $('#adminRegistrationSubmitBtn').html('REGISTER');
                 if(data.message == "success"){
-                    window.location.href = "http://localhost/kazibau/index.php";
+                    window.location.href = base_url+"index.php";
                 }
                 if(data.message == "errEmail"){
                     $('#alertMessages').html('Email Used Exists. Please check and try again..');

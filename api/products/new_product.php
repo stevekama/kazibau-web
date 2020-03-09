@@ -48,6 +48,36 @@ $product->created_date = $d->format('Y-m-d H:i:s');
 $product->edited_date = $d->format('Y-m-d H:i:s');
 
 if($product->save()){
-    $data['message'] = "success";
+    // update num products on the brands
+    $brand_products = $product->find_products_by_brand_id($product->brand_id);
+    $num_brand_products = $brand_products->rowCount();
+    // update brands
+    $brand->id = $current_brand['id'];
+    $brand->user_id = $current_brand['user_id'];
+    $brand->category_id = $current_brand['category_id'];
+    $brand->brand_name = $current_brand['brand_name'];
+    $brand->brand_description = $current_brand['brand_description'];
+    $brand->num_brand_products = $num_brand_products;
+    $brand->created_date = $current_brand['created_date'];
+    $brand->edited_date = $d->format("Y-m-d H:i:s");
+
+    if($brand->save()){
+        // update num of products on the category
+        $category_products = $product->find_products_by_category_id($product->category_id);
+        $num_category_products = $category_products->rowCount();
+        // update category
+        $category->id = $current_category['id'];
+        $category->user_id = $current_category['user_id'];
+        $category->category_name = $current_category['category_name'];
+        $category->category_description = $current_category['category_description'];
+        $category->num_brands = $current_category['num_brands'];
+        $category->num_products = $num_category_products;
+        $category->created_date = $current_category['created_date'];
+        $category->edited_date = $d->format('Y-m-d H:i:s');
+
+        if($category->save()){
+            $data['message'] = "success";
+        }
+    }
 }
 echo json_encode($data);

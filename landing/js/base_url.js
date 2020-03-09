@@ -1,2 +1,2 @@
 // const base_url = window.location.origin;
-const base_url = window.location.origin+'/kazibau/';
+const base_url = window.location.origin+'/kazibau-web/';

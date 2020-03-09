@@ -68,6 +68,17 @@ class Products{
         }
     }
 
+    public function find_products_by_user_id_and_brand_id($user_id=0, $brand_id=0)
+    {
+        $query = "SELECT * FROM ".$this->table_name." WHERE user_id=:user_id AND brand_id=:brand_id ORDER BY id DESC";
+
+        $stmt = $this->conn->prepare($query);
+
+        if($stmt->execute(array('user_id'=>$user_id, 'brand_id'=>$brand_id))){
+            return $stmt;
+        }
+    }
+
     public function find_product_by_id($id=0)
     {
         $query = "SELECT * FROM ".$this->table_name." WHERE id=:id LIMIT 1";
