@@ -35,3 +35,6 @@ require_once(MODELS_PATH.DS.'brands.php');
 
 // load products
 require_once(MODELS_PATH.DS.'products.php');
+
+// load product images
+require_once(MODELS_PATH.DS.'product_images.php');

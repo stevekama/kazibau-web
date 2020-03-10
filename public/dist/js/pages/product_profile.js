@@ -14,6 +14,7 @@ $(document).ready(function(){
                 $('#productDescription').html(data.product_description);
                 find_category_by_id(data.category_id);
                 find_brand_by_id(data.brand_id);
+                find_all_product_images();
                 $('#productStatus').html(data.product_status);
                 $('#productPrice').html(data.product_price);
             }
@@ -44,7 +45,6 @@ $(document).ready(function(){
             data:{action:action, brand_id:brand_id},
             dataType:"json",
             success:function(data){
-                console.log(data);
                 $('#productBrand').html(data.brand_name);
             }
         });
@@ -67,6 +67,7 @@ $(document).ready(function(){
             }
         });
     });
+
     $('#updateProductForm').submit(function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
@@ -79,6 +80,7 @@ $(document).ready(function(){
                 if(data.message == "success"){
                     $('#updateProductForm')[0].reset();
                     $('#updateProductModal').modal('hide');
+                    $('#loadImages').DataTable().destroy();
                     find_product_by_id();
                 }
             }
@@ -128,9 +130,79 @@ $(document).ready(function(){
                     success:function(data){
                         $("#updateProductPicSubmitBtn").val('Update');
                         if(data.message == 'success'){
+                            $('#loadImages').DataTable().destroy();
                             find_product_by_id();
                             $('#updateProductPicForm')[0].reset();
                             $('#updateProductPicModal').modal('hide');
+                        }
+                    }
+                });
+                
+            }
+        }
+    });
+
+    function find_all_product_images(){
+        var dataTable = $('#loadImages').DataTable({
+            "processing":true,
+            "serverSide":true,
+            "order":[],
+            "ajax":{
+                url: base_url+"api/product_image/fetch.php",
+                type:"POST",
+                data:{product_id:product_id}
+            },
+            "autoWidth":false
+        });    
+    }
+
+    // new image
+    $('#newImageBtn').click(function(){
+        var action = "FIND_PRODUCT_BY_ID";
+        $.ajax({
+            url:base_url+'api/products/products.php',
+            type:"POST",
+            data:{action:action, product_id:product_id},
+            dataType:"json",
+            success:function(data){
+                $('#newProductImageId').val(data.id);
+                $('#newImageModal').modal('show');
+            }
+        });
+    });
+
+    /// submit image
+    $('#newImageForm').submit(function(event){
+        event.preventDefault();
+        var product_image = $('#newImage').val();
+        if(product_image == ''){
+            $('#alertMessageImage').html('<div class="alert alert-danger alert-dismissible">Please Select a profile pic</div>');
+            return false;
+        }else{
+            var extension = product_image.split('.').pop().toLowerCase();
+            if(jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1){
+                $('#newImage').val('');
+                $('#alertMessageImage').html('<div class="alert alert-danger alert-dismissible">The file selected is invalid. Please check and try again</div>');
+                return false;
+            }else{
+                $.ajax({
+                    url:base_url+"api/product_image/new_image.php",
+                    type:"POST",
+                    data: new FormData(this),
+                    dataType:"json",
+                    contentType: false,       // The content type used when sending data to the server.
+                    cache: false,             // To unable request pages to be cached
+                    processData: false,
+                    beforeSend: function () {
+                        $("#newProductImageSubmitBtn").html('Uploading..');
+                    },
+                    success:function(data){
+                        $("#updateProductPicSubmitBtn").html('Save');
+                        if(data.message == 'success'){
+                            $('#loadImages').DataTable().destroy();
+                            find_product_by_id();
+                            $('#newImageForm')[0].reset();
+                            $('#newImageModal').modal('hide');
                         }
                     }
                 });

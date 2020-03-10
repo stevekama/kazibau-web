@@ -73,7 +73,24 @@ require_once('../layouts/header.php');
         </ul>
         <div class="tab-content">
           <div class="active tab-pane" id="product_images">
-              images  
+            <div class="table-responsive">
+                <table id="loadImages" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>PRODUCT IMAGE</th>
+                            <th>DETAILS</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>PRODUCT IMAGE</th>
+                            <th>DETAILS</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <hr>
+                <button id="newImageBtn" class="btn btn-block btn-info">New Image</button>
+            </div> 
           </div>
           <!-- /.tab-pane -->
         </div>
@@ -85,82 +102,123 @@ require_once('../layouts/header.php');
   </div>
   <!-- /.row -->
 
-  <!--update product details -->
-  <div class="modal fade" id="updateProductModal">
-      <div class="modal-dialog">
-          <form id="updateProductForm">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-                      <h4 class="modal-title">Update Product</h4>
-                  </div>
-                  <div class="modal-body">
-                    <div class="form-group">
-                        <input type="hidden" name="product_id" id="updateProductId" class="form-control" placeholder="Product Name">
+    <!--update product details -->
+    <div class="modal fade" id="updateProductModal">
+        <div class="modal-dialog">
+            <form id="updateProductForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Update Product</h4>
                     </div>
-                      <div class="form-group">
-                          <label for="product">Product Name:</label>
-                          <input type="text" name="product" id="updateProduct" class="form-control" placeholder="Product Name">
-                      </div>
-                      <div class="form-group">
-                          <label for="product_description">Product Description:</label>
-                          <textarea name="description" id="updateProductDescription" class="form-control" placeholder="Description"></textarea>
-                      </div>
-                      <div class="form-group">
-                          <label for="product_price">Price:</label>
-                          <input type="text" name="price" id="updateProductPrice" class="form-control" placeholder="Product Price">
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                      <button type="submit" id="updateProductSubmitBtn" class="btn btn-info">Update</button>
-                  </div>
-              </div>
-              <!-- /.modal-content -->
-          </form>
-      </div>
-      <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" name="product_id" id="updateProductId" class="form-control" placeholder="Product Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="product">Product Name:</label>
+                            <input type="text" name="product" id="updateProduct" class="form-control" placeholder="Product Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="product_description">Product Description:</label>
+                            <textarea name="description" id="updateProductDescription" class="form-control" placeholder="Description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="product_price">Price:</label>
+                            <input type="text" name="price" id="updateProductPrice" class="form-control" placeholder="Product Price">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" id="updateProductSubmitBtn" class="btn btn-info">Update</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </form>
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
-  <!--update product pic -->
-  <div class="modal fade" id="updateProductPicModal">
-      <div class="modal-dialog">
-          <form id="updateProductPicForm">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-                      <h4 class="modal-title">Change Product pic</h4>
-                  </div>
-                  <div class="modal-body">
-                    <div class="form-group">
-                        <span id="alertMessageProfile"></span>
+    <!--update product pic -->
+    <div class="modal fade" id="updateProductPicModal">
+        <div class="modal-dialog">
+            <form id="updateProductPicForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Change Product pic</h4>
                     </div>
-                    <div class="form-group">
-                        <input type="hidden" name="product_id" id="updateProductPicId" class="form-control" placeholder="Product Name">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <span id="alertMessageProfile"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="product_id" id="updateProductPicId" class="form-control" placeholder="Product Name">
+                        </div>
+                        
+                        <div class="form-group">
+                        <label for="updateProductPic">Product Pic</label>
+                        <input type="file" name="pic" id="updateProductPic">
+                        <p class="help-block">Please select quality picture here.</p>
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                      <label for="updateProductPic">Product Pic</label>
-                      <input type="file" name="pic" id="updateProductPic">
-                      <p class="help-block">Please select qua;ity picture here.</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" id="updateProductPicSubmitBtn" class="btn btn-info">Update</button>
                     </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                      <button type="submit" id="updateProductPicSubmitBtn" class="btn btn-info">Update</button>
-                  </div>
-              </div>
-              <!-- /.modal-content -->
-          </form>
-      </div>
-      <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
+                </div>
+                <!-- /.modal-content -->
+            </form>
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!--new product images -->
+    <div class="modal fade" id="newImageModal">
+        <div class="modal-dialog">
+            <form id="newImageForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">New Product Image</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <span id="alertMessageImage"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="product_id" id="newProductImageId" class="form-control" placeholder="Product Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="newImage">Product Image</label>
+                            <input type="file" name="image" id="newImage">
+                            <p class="help-block">Please select quality picture here.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="newImageDetails">Product Details</label>
+                            <textarea name="details" id="newImageDetails" class="form-control" placeholder="Enter Details"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" id="newProductImageSubmitBtn" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </form>
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
   
 </section>
 <?php require_once('../layouts/footer.php'); ?>
