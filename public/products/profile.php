@@ -15,92 +15,92 @@ require_once('../layouts/header.php');
 
 <!-- Main content -->
 <section class="content">
-<div class="row">
-    <div class="col-md-3">
-        <!-- Profile Image -->
-        <div class="box box-primary">
-            <div class="box-body box-profile">
-                <span id="productPic">
-                </span>
-                <h3 id="productName" class="profile-username text-center">
-                </h3>
-                <p id="productDescription" class="text-muted text-center">
-                </p>
-                <hr>
-                <a href="#" id="updateProductPicBtn" class="btn btn-primary btn-block">
-                    <b>Change Profile</b>
-                </a>
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Profile Image -->
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <span id="productPic">
+                    </span>
+                    <h3 id="productName" class="profile-username text-center">
+                    </h3>
+                    <p id="productDescription" class="text-muted text-center">
+                    </p>
+                    <hr>
+                    <a href="#" id="updateProductPicBtn" class="btn btn-primary btn-block">
+                        <b>Change Profile</b>
+                    </a>
+                </div>
+                <!-- /.box-body -->
             </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
+            <!-- /.box -->
 
-        <!-- About Me Box -->
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">About product</h3>
+            <!-- About Me Box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">About product</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <strong><i class="fa fa-book margin-r-5"></i> Category</strong>
+                    <p id="productCategory" class="text-muted"></p>
+                    <hr>
+                    <strong><i class="fa fa-trademark margin-r-5"></i> Brand</strong>
+                    <p id="productBrand" class="text-muted"></p>
+                    <hr>
+                    <strong><i class="fa fa-balance-scale margin-r-5"></i> Status</strong>
+                    <p id="productStatus" class="text-muted"></p>
+                    <hr>
+                    <strong><i class="fa fa-money margin-r-5"></i> Status</strong>
+                    <p id="productPrice" class="text-muted"></p>
+                    <hr>
+                    <button id="updateProductBtn" class="btn btn-block btn-primary">Change Details</button>
+                </div>
+                <!-- /.box-body -->
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <strong><i class="fa fa-book margin-r-5"></i> Category</strong>
-                <p id="productCategory" class="text-muted"></p>
-                <hr>
-                <strong><i class="fa fa-trademark margin-r-5"></i> Brand</strong>
-                <p id="productBrand" class="text-muted"></p>
-                <hr>
-                <strong><i class="fa fa-balance-scale margin-r-5"></i> Status</strong>
-                <p id="productStatus" class="text-muted"></p>
-                <hr>
-                <strong><i class="fa fa-money margin-r-5"></i> Status</strong>
-                <p id="productPrice" class="text-muted"></p>
-                <hr>
-                <button id="updateProductBtn" class="btn btn-block btn-primary">Change Details</button>
-            </div>
-            <!-- /.box-body -->
+            <!-- /.box -->
         </div>
-        <!-- /.box -->
-    </div>
-    <!-- /.col -->
+        <!-- /.col -->
 
-    <div class="col-md-9">
-      <div class="nav-tabs-custom">
-        <ul class="nav nav-tabs">
-          <li class="active">
-            <a href="#product_images" data-toggle="tab">
-              More Images
-            </a>
-          </li>
-        </ul>
-        <div class="tab-content">
-          <div class="active tab-pane" id="product_images">
-            <div class="table-responsive">
-                <table id="loadImages" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>PRODUCT IMAGE</th>
-                            <th>DETAILS</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>PRODUCT IMAGE</th>
-                            <th>DETAILS</th>
-                        </tr>
-                    </tfoot>
-                </table>
-                <hr>
-                <button id="newImageBtn" class="btn btn-block btn-info">New Image</button>
-            </div> 
-          </div>
-          <!-- /.tab-pane -->
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#product_images" data-toggle="tab">
+                            More Images
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="active tab-pane" id="product_images">
+                        <div class="table-responsive">
+                            <table id="loadImages" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>PRODUCT IMAGE</th>
+                                        <th>DETAILS</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>PRODUCT IMAGE</th>
+                                        <th>DETAILS</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <hr>
+                            <button id="newImageBtn" class="btn btn-block btn-info">New Image</button>
+                        </div> 
+                    </div>
+                    <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+            </div>
+            <!-- /.nav-tabs-custom -->
         </div>
-        <!-- /.tab-content -->
-      </div>
-      <!-- /.nav-tabs-custom -->
+        <!-- /.col -->
     </div>
-    <!-- /.col -->
-  </div>
-  <!-- /.row -->
+    <!-- /.row -->
 
     <!--update product details -->
     <div class="modal fade" id="updateProductModal">
